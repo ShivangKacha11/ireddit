@@ -12,6 +12,10 @@ dependencies {
     implementation 'io.quarkus:quarkus-hibernate-validator'
     implementation 'io.quarkus:quarkus-scheduler'
     implementation 'redis.clients:jedis:5.2.0'
+    implementation ('org.opensearch.client:opensearch-rest-high-level-client:2.18.0')
+            {
+                exclude group: "org.apache.logging.log4j", module: "log4j-core"
+            }
     implementation 'io.quarkus:quarkus-redis-client'
     implementation 'io.quarkus:quarkus-messaging-kafka'
     implementation 'io.quarkus:quarkus-kafka-client'
