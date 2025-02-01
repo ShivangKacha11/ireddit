@@ -1,7 +1,6 @@
-package org.dev.service;
+package org.dev.services.kafka;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.ws.rs.core.Response;
 
 import org.dev.entity.redditChildrenData;
 import org.eclipse.microprofile.reactive.messaging.Channel;
@@ -17,6 +16,7 @@ public class KafkaProducer {
 
     public void produce(redditChildrenData message){
         try {
+//            System.out.println(message);
             ObjectMapper mapper = new ObjectMapper();
             String serialisedmessage = mapper.writeValueAsString(message);
             CompletionStage<Void> ackStage = emitter.send(serialisedmessage);
@@ -25,7 +25,7 @@ public class KafkaProducer {
                     System.out.println("Error in sending message: " + error.getMessage());
                     throw new RuntimeException(error);
                 } else {
-                    System.out.println("Message sent to Kafka: " + message);
+                    System.out.println("Message sent to Kafka: ");
                 }
             });
         } catch (Exception e) {
